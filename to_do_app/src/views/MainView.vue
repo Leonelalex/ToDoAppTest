@@ -8,6 +8,7 @@
             <div class="about">
                 <router-link to="/home" class="menuItem">Home</router-link>
                 <router-link to="/home/about" class="menuItem">About</router-link>
+                <router-link to="/" class="menuItem" @click="logout">Log Out</router-link>
             </div>
 
     </v-app-bar>
@@ -33,6 +34,14 @@ export default {
             username: ''
         }
     },
+    methods: {
+        logout() {
+            localStorage.removeItem('email');
+            localStorage.removeItem('userid');
+            localStorage.removeItem('username');
+            this.$router.push('/');
+        }
+    }
 }
 </script>
 

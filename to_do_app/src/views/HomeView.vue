@@ -4,7 +4,7 @@
             <v-btn color="black" text="Crear Tareas" @click="dialog = true"></v-btn>
             <h1>Mis Tareas</h1>
         </div>
-        <v-container>
+        <v-container v-loading="!isLoading">
             <v-row>
                 <v-col
                     v-for="task in tasks"
@@ -19,6 +19,7 @@
                 </v-col>
             </v-row>
         </v-container>
+        <v-progress-circular indeterminate :size="128" :width="12" v-if="isLoading"></v-progress-circular>
     </v-main>
 
     <v-dialog
@@ -81,11 +82,13 @@ export default {
             tasks: [],
             dialog: false,
             title: '',
-            description: ''
+            description: '',
+            isLoading: false
         }
     },
     methods: {
         getTasks(){
+            this.isLoading = true;
             fetch(`http://localhost:3000/todo/${this.userid}`, {
                 method: 'GET',
                 headers: {
@@ -99,16 +102,19 @@ export default {
                 if (data.status === 200) {
                     console.log('Tasks:', tasks);
                     this.tasks = tasks;
+                    this.isLoading = false;
                 } else {
                     console.error('Tasks not found:', data.message);
                     this.message = 'Tareas no encontradas';
                     this.notasks = true;
+                    this.isLoading = false;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 this.message = 'Tareas no encontradas';
                 this.notasks = true;
+                this.isLoading = false;
             });
         },
         createTask(){

@@ -1,0 +1,22 @@
+{
+  "name": "to_do_app_service",
+  "version": "1.0.0",
+  "description": "servicio para ToDoApp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Leonel Recinos (leonelrecinos1994@gmail.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.45",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "sequelize": "^6.37.5"
+  }
+}
